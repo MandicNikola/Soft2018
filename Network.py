@@ -6,6 +6,9 @@ Created on Fri Mar 29 19:28:01 2019
 model neuronske mreze za racunanje
 """
 #%% 
+import numpy as np
+import cv2
+import os
 from keras.models import Sequential
 from keras.models import load_model
 from keras.models import save_model
