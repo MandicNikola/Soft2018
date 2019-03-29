@@ -13,7 +13,9 @@ class Number():
         self.ID = ID
         self.rect = rect
         self.add = False
+        self.decrease = False
         self.overLapping = False
+        self.disappeared = False
         self.value = -1
         self.k = 0
         self.n = 0
@@ -25,12 +27,40 @@ class Number():
         center = (cX,cY)
         return center
     
-    def calc_path(self):
+    #metoda za racunanje potencijalne putanje cifre
+    #racunamo kao pravolinijsku putanju koju update svaki frame
+    #kriterijum za odredjivanje sledece cifre u pracenju
+    def calc_path(self, newRect):
+        x1,y1,w,h = newRect
+        x2,y2,w,h = self.rect
+        
+        y1 = 480.0 - y1
+        y2 = 480.0 - y2
+        
+        k = round((y2 - y1)/(x2 - x1),3)
+        n = round(y1 - k*x1, 3)
+        return k,n
+
+    def update_number_info(self,newRect,k,n):
+        self.rect = newRect
+        self.k = k
+        self.n = n
+        return
+        
+    def update_value(self,newValue):
+        if(self.value == -1):
+            self.value = newValue
         return
 
-    def check_overLapping(self):
+    def add_num(self):
+        self.add_num = True
+        return
+    
+    def dec_num(self):
+        self.decrease = True
         return
 
+num = Number((1,1,1,1),1)
 
 
 
