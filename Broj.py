@@ -10,15 +10,21 @@ Dok u nekim slucajevima jednostavno nije pottrebno tako
 
 class Number():
     def __init__(self, rect, ID):
+        x, y, w, h = rect
         self.ID = ID
         self.rect = rect
         self.add = False
         self.decrease = False
-        self.overLapping = False
         self.disappeared = False
+        self.maxWidth = w
+        self.maxHeight = h
         self.value = -1
         self.k = 0
         self.n = 0
+        self.forbidden = False
+        
+        
+        
 
     def calc_center(self):
         x,y,w,h = self.rect
@@ -42,10 +48,16 @@ class Number():
         return k,n
 
     def update_number_info(self,newRect,k,n):
+        x,y,w,h = newRect
         self.rect = newRect
         self.k = k
         self.n = n
-        return
+        if(w > self.maxWidth and h > self.maxHeight):
+            self.maxWidth = w
+            self.maxHeight = h
+            return True
+        else:
+            return False
         
     def update_value(self,newValue):
         if(self.value == -1):
@@ -60,8 +72,6 @@ class Number():
         self.decrease = True
         return
 
-
-
-
-
-       
+    def update_disappeared(self):
+        self.disappeared = True
+        return
